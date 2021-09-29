@@ -6,4 +6,4 @@ With this code sample, you can deploy a baseline IoT solution that leverages Azu
 
 ## Resources
 
-Module on Microsoft Learn coming soon - it will contain full context, instructions, and even a free environment to try it yourself. Watch this space!
+[Module on Microsoft Learn](https://docs.microsoft.com/en-us/learn/modules/deploy-iot-solution-azure-sql-database/)
