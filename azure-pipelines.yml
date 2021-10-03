@@ -46,6 +46,7 @@ stages:
         ScriptType: 'FilePath'
         ScriptPath: 'scripts/SetAzureFirewallRule.ps1'
         ScriptArguments: '$(serverName) $(resourceGroupName) $(ipAddress)'
+        errorActionPreference: 'continue'
         azurePowerShellVersion: 'LatestVersion'
 
 - stage: DeploySchemaDB
