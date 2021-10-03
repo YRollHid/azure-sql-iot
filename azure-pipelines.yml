@@ -50,6 +50,7 @@ stages:
 
 - stage: DeploySchemaDB
   displayName: Deploy the database schema using SQLCMD
+  pool: windows-latest
   jobs:
   - job: DeploySchemaDB
     displayName: Deploy the db schema using SQLCMD
