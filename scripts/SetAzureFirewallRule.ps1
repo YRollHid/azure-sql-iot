@@ -3,7 +3,7 @@ param
 (
   [String] [Parameter(Mandatory = $true)] $ServerName,
   [String] [Parameter(Mandatory = $true)] $ResourceGroup,
-  [String] [Parameter(Mandatory = $true)] $ipAddress
+  [String] [Parameter(Mandatory = $true)] $ipAddress,
   [String] $AzureFirewallR1Name = "CloudAdminAllowedIPs",
   [String] $AzureFirewallR2Name = "AzDOAllowedIPs"
 )

@@ -33,5 +33,13 @@ stages:
         deploymentMode: 'Incremental'
         deploymentName: 'DeployPipelineTemplate'
 
+    - task: AzurePowerShell@5
+      displayName: SetAzureFirewallRule
+      inputs:
+        azureSubscription: '$(azRMConnection)'
+        ScriptType: 'FilePath'
+        ScriptPath: 'scripts/SetAzureFirewallRule.ps1'
+        ScriptArguments: '$(serverName) $(resourceGroupName) $(ipAddress)'
+        azurePowerShellVersion: 'LatestVersion'
 
 
