@@ -48,4 +48,18 @@ stages:
         ScriptArguments: '$(serverName) $(resourceGroupName) $(ipAddress)'
         azurePowerShellVersion: 'LatestVersion'
 
-
+- stage: DeploySchemaDB
+  displayName: Deploy the database schema using SQLCMD
+  jobs:
+  - job: DeploySchemaDB
+    displayName: Deploy the db schema using SQLCMD
+    steps:
+    - task: SqlDacpacDeploymentOnMachineGroup@0
+      inputs:
+        TaskType: 'sqlQuery'
+        SqlFile: 'sql_schema/script.sql'
+        ServerName: '$(serverName).database.windows.net'
+        DatabaseName: 'iot-db'
+        AuthScheme: 'sqlServerAuthentication'
+        SqlUsername: '$(adminSqlLogin)'
+        SqlPassword: '$(password)'
