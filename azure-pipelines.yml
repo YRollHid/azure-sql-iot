@@ -33,6 +33,12 @@ stages:
         deploymentMode: 'Incremental'
         deploymentName: 'DeployPipelineTemplate'
 
+- stage: SetAzureFirewallRule
+  displayName: Set Azure Firewall Rules
+  jobs:
+  - job: SetAzureFirewallRule
+    displayName: Set Azure Firewall Rules
+    steps:
     - task: AzurePowerShell@5
       displayName: SetAzureFirewallRule
       inputs:
