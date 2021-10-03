@@ -54,12 +54,14 @@ stages:
   - job: DeploySchemaDB
     displayName: Deploy the db schema using SQLCMD
     steps:
-    - task: SqlDacpacDeploymentOnMachineGroup@0
+    - task: SqlAzureDacpacDeployment@1
       inputs:
-        TaskType: 'sqlQuery'
-        SqlFile: 'sql_schema/script.sql'
+        azureSubscription: '$(azRMConnection)'
+        AuthenticationType: 'server'
         ServerName: '$(serverName).database.windows.net'
         DatabaseName: 'iot-db'
-        AuthScheme: 'sqlServerAuthentication'
         SqlUsername: '$(adminSqlLogin)'
         SqlPassword: '$(password)'
+        deployType: 'SqlTask'
+        SqlFile: 'sql_schema/script.sql'
+        IpDetectionMethod: 'AutoDetect'
