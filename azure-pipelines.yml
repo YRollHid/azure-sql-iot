@@ -9,11 +9,20 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables:
+- group: azure-sql-iot-release
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: '$(azRMConnection)'
+    subscriptionId: '$(subscriptionId)'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: '$(resourceGroupName)'
+    location: 'East US 2'
+    templateLocation: 'Linked artifact'
+    csmFile: 'https://raw.githubusercontent.com/YRollHid/azure-sql-iot/main/azure_deployment/template.json'
+    overrideParameters: '-iothub_name $(iothub) -server_sql_name $(serverName) -server_admin_name $(adminSqlLogin) -server_admin_password $(password) -site_iot_name $(iotsite) -serverfarm_iot_name $(iotServerFarm) -virtualmachine_devicesimulator_name $(iotSimulator) -logworkspace_name $(logworkspace) -storageaccount_iothub_name $(iotStorageAccount) -storageaccount_iothub_container $(storageContainer) -networkinterface_devicesimulator_name $(networkInterface) -virtualnetwork_iot_name $(vNet) -ip_address_name $(ipAddressName) -ssh_public_key $(sshPublicKey)'
+    deploymentMode: 'Incremental'
+    deploymentName: 'DeployPipelineTemplate'
